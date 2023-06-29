@@ -1,0 +1,17 @@
+.card-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: burlywood;
+  margin: 1%;
+}
+.card-div img {
+  display: flex;
+  width: 500px;
+}
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+}
