@@ -1,5 +1,7 @@
 .content {
   display: flex;
+  column-gap: 15px;
+  padding: 1%;
 }
 
 .feed {
