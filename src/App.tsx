@@ -3,13 +3,20 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Header } from "./components/Header/Header";
 import { Feed } from "./components/Feed/Feed";
+import { Subreddits } from "./components/Subreddits/Subreddits";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Feed />
-      // TODO: subreddits
+      <div className="content">
+        <div className="feed">
+          <Feed />
+        </div>
+        <div className="subreddits">
+          <Subreddits />
+        </div>
+      </div>
     </div>
   );
 }

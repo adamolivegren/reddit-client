@@ -1,0 +1,12 @@
+.user {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  /* justify-content: center; */
+  background-color: aqua;
+}
+
+.user img {
+  width: auto;
+  height: 50px;
+}
