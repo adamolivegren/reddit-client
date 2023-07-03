@@ -13,9 +13,11 @@ export function Subreddits() {
   return (
     <div className="subreddits">
       <h2>Subreddits</h2>
-      {users.map((user, index) => {
-        return <User key={index} {...user} />;
-      })}
+      <div className="users">
+        {users.map((user, index) => {
+          return <User key={index} {...user} />;
+        })}
+      </div>
     </div>
   );
 }

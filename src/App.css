@@ -4,9 +4,9 @@
   padding: 1%;
 }
 
-.feed {
+.left-col {
   width: 70%;
 }
-.subreddits {
+.right-col {
   width: 30%;
 }

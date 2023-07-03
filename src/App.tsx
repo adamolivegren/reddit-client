@@ -10,10 +10,10 @@ function App() {
     <div className="App">
       <Header />
       <div className="content">
-        <div className="feed">
+        <div className="left-col">
           <Feed />
         </div>
-        <div className="subreddits">
+        <div className="right-col">
           <Subreddits />
         </div>
       </div>

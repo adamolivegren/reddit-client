@@ -1,42 +1,53 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import {
+  getPostComments,
+  getSubredditPosts,
+  getSubreddits,
+} from "../api/reddit";
 
-const exampleImg =
-  "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80";
+console.log(getSubredditPosts("Home"));
 
-//TODO: add type for state
 const initialState = {
-  cards: [
-    {
-      title: "Example title 1",
-      img: exampleImg,
-      timeSincePost: 8,
-      numberOfComments: 0,
-      author: {
-        name: "Adam",
-      },
-    },
-    {
-      title: "Example title 2",
-      img: exampleImg,
-      timeSincePost: 8,
-      numberOfComments: 0,
-      author: {
-        name: "Hampus",
-      },
-    },
-  ],
-  //add loading, success, error etc for thunks
-  //add searchTerm for api call
+  cards: [],
+  isLoading: false,
+  error: false,
+  searchTerm: "",
+  selectedSubreddit: "",
 };
 
 const redditSlice = createSlice({
   name: "reddit",
   initialState: initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPosts.pending, (state) => {
+        state.isLoading = true;
+        state.error = false;
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = false;
+        state.cards = action.payload;
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = true;
+      });
+  },
 });
-
-//TODO: export actions/reducers
 
 export const selectCards = (state: RootState) => state.reddit.cards;
 export default redditSlice.reducer;
+
+/**
+ * Redux-thunk for asynx API request
+ **/
+export const fetchPosts = createAsyncThunk(
+  "reddit/fetchPosts",
+  async (subreddit: string) => {
+    const data = await getSubredditPosts(subreddit);
+    return data;
+  }
+);

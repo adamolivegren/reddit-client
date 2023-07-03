@@ -1,4 +1,14 @@
 .subreddits {
-  /* margin-top: 1%; */
+  padding-left: 5%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
 }

@@ -9,19 +9,19 @@ import { useState } from "react";
 
 export type CardType = {
   title: string;
-  img: string;
-  timeSincePost: number;
-  author: UserType;
+  thumbnail?: string;
+  timeSincePost?: number;
+  author: string;
   comments?: CommentsFeedType;
-  numberOfComments: number;
+  num_comments: number;
 };
 export function Card({
   title,
-  img,
+  thumbnail,
   timeSincePost,
   author,
   comments,
-  numberOfComments,
+  num_comments,
 }: CardType) {
   const [isUpvoted, setIsUpvoted] = useState<boolean>(false);
   const [isDownvoted, setIsDownvoted] = useState<boolean>(false);
@@ -48,11 +48,11 @@ export function Card({
       </div>
       <div className="right-div">
         <h2>{title}</h2>
-        <img src={img} alt="" className="src" />
+        <img src={thumbnail} alt="" className="src" />
         <div className="card-info">
-          <p>Posted by: {author?.name}</p>
+          <p>Posted by: {author}</p>
           <p>{timeSincePost} hours ago</p>
-          <p>Number of comments: {numberOfComments}</p>
+          <p>Number of comments: {num_comments}</p>
         </div>
       </div>
     </div>

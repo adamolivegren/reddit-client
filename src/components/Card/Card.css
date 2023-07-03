@@ -7,11 +7,6 @@
   display: flex;
   width: 500px;
 }
-.card-info {
-  display: flex;
-  justify-content: space-between;
-  width: 95%;
-}
 
 .left-div {
   width: 10%;
@@ -22,4 +17,9 @@
 }
 .right-div {
   width: 90%;
+}
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
 }
