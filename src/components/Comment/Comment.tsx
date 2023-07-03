@@ -1,7 +1,5 @@
-import { UserType } from "../User/User";
-
 export type CommentType = {
-  author: UserType;
+  author: string;
   comment: string;
   timePosted: number;
 };

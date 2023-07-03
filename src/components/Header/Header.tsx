@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import "./Header.css";
-import { createDiffieHellmanGroup } from "crypto";
-import { toHaveAccessibleDescription } from "@testing-library/jest-dom/matchers";
+import { useDispatch } from "react-redux";
+import { setSearchTerm } from "../../store/redditSlice";
 
 export function Header() {
   const [searchText, setSearchText] = useState<string>("");
+  const dispatch = useDispatch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
 
   const handleSearch = () => {
-    console.log(searchText);
+    dispatch(setSearchTerm(searchText));
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

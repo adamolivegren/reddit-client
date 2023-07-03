@@ -10,7 +10,7 @@ export function Feed() {
 
   useEffect(() => {
     dispatch(fetchPosts("Home"));
-  }, []);
+  }, [cards]);
 
   return (
     <div>

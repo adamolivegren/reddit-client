@@ -2,7 +2,6 @@ import {
   BsFillArrowUpCircleFill,
   BsFillArrowDownCircleFill,
 } from "react-icons/bs";
-import { UserType } from "../User/User";
 import { CommentsFeedType } from "../CommentsFeed/CommentsFeed";
 import "./Card.css";
 import { useState } from "react";
@@ -10,17 +9,15 @@ import { useState } from "react";
 export type CardType = {
   title: string;
   thumbnail?: string;
-  timeSincePost?: number;
+  created: number;
   author: string;
-  comments?: CommentsFeedType;
   num_comments: number;
 };
 export function Card({
   title,
   thumbnail,
-  timeSincePost,
+  created,
   author,
-  comments,
   num_comments,
 }: CardType) {
   const [isUpvoted, setIsUpvoted] = useState<boolean>(false);
@@ -29,6 +26,11 @@ export function Card({
   const handleVoteClick = (voteType: string) => {
     setIsUpvoted(voteType === "up" && !isUpvoted);
     setIsDownvoted(voteType === "down" && !isDownvoted);
+  };
+
+  const convertTimeCreated = (createdTime: number): number => {
+    const currentTime = Math.floor(Date.now() / 1000);
+    return Math.floor((currentTime - createdTime) / 3600);
   };
 
   return (
@@ -51,7 +53,7 @@ export function Card({
         <img src={thumbnail} alt="" className="src" />
         <div className="card-info">
           <p>Posted by: {author}</p>
-          <p>{timeSincePost} hours ago</p>
+          <p>{convertTimeCreated(created)} hours ago</p>
           <p>Number of comments: {num_comments}</p>
         </div>
       </div>

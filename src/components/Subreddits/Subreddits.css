@@ -1,14 +1,28 @@
-.subreddits {
-  padding-left: 5%;
+.subreddits-column {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   overflow: hidden;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
-.users {
+.subreddits-list {
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
+.subreddit {
   display: flex;
-  flex-direction: column;
-  row-gap: 15px;
+  align-items: center;
+  column-gap: 15px;
+  margin-bottom: 10px;
+}
+
+.subreddit img {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #000;
+  border-radius: 50px;
 }

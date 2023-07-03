@@ -6,10 +6,12 @@ import {
   getSubreddits,
 } from "../api/reddit";
 
-console.log(getSubredditPosts("Home"));
+//console.log(getSubredditPosts("Home"));
+// console.log(getSubreddits());
 
 const initialState = {
   cards: [],
+  subreddits: [],
   isLoading: false,
   error: false,
   searchTerm: "",
@@ -19,7 +21,14 @@ const initialState = {
 const redditSlice = createSlice({
   name: "reddit",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setSearchTerm(state, action) {
+      state.searchTerm = action.payload;
+    },
+    setSelectedSubreddit(state, action) {
+      state.selectedSubreddit = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state) => {
@@ -34,20 +43,46 @@ const redditSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = true;
+      })
+      .addCase(fetchSubreddits.pending, (state, action) => {
+        state.isLoading = true;
+        state.error = false;
+      })
+      .addCase(fetchSubreddits.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = false;
+        state.subreddits = action.payload;
+      })
+      .addCase(fetchSubreddits.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = true;
       });
   },
 });
 
+// Selectors
 export const selectCards = (state: RootState) => state.reddit.cards;
+export const selectSubreddits = (state: RootState) => state.reddit.subreddits;
+
+// Actions
+export const { setSearchTerm } = redditSlice.actions;
+
+// Reducer
 export default redditSlice.reducer;
 
-/**
- * Redux-thunk for asynx API request
- **/
+// Redux-thunks for async API request
 export const fetchPosts = createAsyncThunk(
   "reddit/fetchPosts",
   async (subreddit: string) => {
     const data = await getSubredditPosts(subreddit);
+    return data;
+  }
+);
+
+export const fetchSubreddits = createAsyncThunk(
+  "reddit/fetchSubreddits",
+  async () => {
+    const data = await getSubreddits();
     return data;
   }
 );

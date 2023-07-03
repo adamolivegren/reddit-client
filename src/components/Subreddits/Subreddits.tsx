@@ -1,23 +1,38 @@
-import { UserType } from "../User/User";
-import { selectSubreddits } from "../../store/subredditsSlice";
-import { useSelector } from "react-redux";
-import { User } from "../User/User";
+import { fetchSubreddits, selectSubreddits } from "../../store/redditSlice";
+import { useDispatch, useSelector } from "react-redux";
 import "./Subreddits.css";
+import { useEffect } from "react";
 
-export type SubredditsType = {
-  users: UserType[];
+export type SubredditType = {
+  display_name: string;
+  url: string;
+  id: string;
+  header_img: string;
 };
 
 export function Subreddits() {
-  const users = useSelector(selectSubreddits);
+  const dispatch = useDispatch();
+  const subreddits = useSelector(selectSubreddits);
+
+  useEffect(() => {
+    dispatch(fetchSubreddits());
+  }, [subreddits]);
+
   return (
-    <div className="subreddits">
+    <div className="subreddits-column">
       <h2>Subreddits</h2>
-      <div className="users">
-        {users.map((user, index) => {
-          return <User key={index} {...user} />;
+      <ul className="subreddits-list">
+        {subreddits.map((subreddit: SubredditType) => {
+          return (
+            <li key={subreddit.id}>
+              <div className="subreddit">
+                <img src={subreddit.header_img} alt="" />
+                {subreddit.display_name}
+              </div>
+            </li>
+          );
         })}
-      </div>
+      </ul>
     </div>
   );
 }
