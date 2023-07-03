@@ -1,7 +1,13 @@
-import { fetchSubreddits, selectSubreddits } from "../../store/redditSlice";
+import {
+  fetchSubreddits,
+  selectSubreddits,
+  setSelectedSubreddit,
+  selectSelectedSubreddit,
+} from "../../store/redditSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "./Subreddits.css";
 import { useEffect } from "react";
+import { AppDispatch } from "../../store/store";
 
 export type SubredditType = {
   display_name: string;
@@ -11,12 +17,17 @@ export type SubredditType = {
 };
 
 export function Subreddits() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const subreddits = useSelector(selectSubreddits);
+  const selectedSubreddit = useSelector(selectSelectedSubreddit);
 
   useEffect(() => {
     dispatch(fetchSubreddits());
-  }, [subreddits]);
+  }, []);
+
+  const handleClick = (subredditName: string) => {
+    dispatch(setSelectedSubreddit(subredditName));
+  };
 
   return (
     <div className="subreddits-column">
@@ -25,7 +36,16 @@ export function Subreddits() {
         {subreddits.map((subreddit: SubredditType) => {
           return (
             <li key={subreddit.id}>
-              <div className="subreddit">
+              <div
+                className="subreddit"
+                style={{
+                  backgroundColor:
+                    selectedSubreddit === subreddit.display_name
+                      ? "rgb(206, 206, 206)"
+                      : "",
+                }}
+                onClick={() => handleClick(subreddit.display_name)}
+              >
                 <img src={subreddit.header_img} alt="" />
                 {subreddit.display_name}
               </div>

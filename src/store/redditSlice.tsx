@@ -5,9 +5,12 @@ import {
   getSubredditPosts,
   getSubreddits,
 } from "../api/reddit";
+import Fuse from "fuse.js";
+import { useEffect } from "react";
+import { Root } from "react-dom/client";
 
 //console.log(getSubredditPosts("Home"));
-// console.log(getSubreddits());
+//console.log(getSubreddits());
 
 const initialState = {
   cards: [],
@@ -15,13 +18,16 @@ const initialState = {
   isLoading: false,
   error: false,
   searchTerm: "",
-  selectedSubreddit: "",
+  selectedSubreddit: "Home",
 };
 
 const redditSlice = createSlice({
   name: "reddit",
   initialState: initialState,
   reducers: {
+    setCards(state, action) {
+      state.cards = action.payload;
+    },
     setSearchTerm(state, action) {
       state.searchTerm = action.payload;
     },
@@ -63,9 +69,13 @@ const redditSlice = createSlice({
 // Selectors
 export const selectCards = (state: RootState) => state.reddit.cards;
 export const selectSubreddits = (state: RootState) => state.reddit.subreddits;
+export const selectSelectedSubreddit = (state: RootState) =>
+  state.reddit.selectedSubreddit;
+export const selectSearchTerm = (state: RootState) => state.reddit.searchTerm;
 
 // Actions
-export const { setSearchTerm } = redditSlice.actions;
+export const { setSearchTerm, setSelectedSubreddit, setCards } =
+  redditSlice.actions;
 
 // Reducer
 export default redditSlice.reducer;

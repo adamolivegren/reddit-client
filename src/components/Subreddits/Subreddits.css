@@ -18,6 +18,11 @@
   align-items: center;
   column-gap: 15px;
   margin-bottom: 10px;
+  cursor: pointer;
+  padding: 8px;
+}
+.subreddit:hover {
+  background-color: rgb(206, 206, 206) !important;
 }
 
 .subreddit img {
