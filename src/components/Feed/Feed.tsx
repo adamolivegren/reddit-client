@@ -15,11 +15,11 @@ export function Feed() {
   const cards = useSelector(selectCards);
   const [filteredCards, setFilteredCards] = useState(cards); //local state. What is to be displayed.
 
-  const loadingElements = [
-    <FeedLoading key="1" />,
-    <FeedLoading key="2" />,
-    <FeedLoading key="3" />,
-  ];
+  // const loadingElements = [
+  //   <FeedLoading key="1" />,
+  //   <FeedLoading key="2" />,
+  //   <FeedLoading key="3" />,
+  // ];
 
   useEffect(() => {
     dispatch(fetchPosts(selectedSubreddit));
@@ -30,7 +30,7 @@ export function Feed() {
   }, [cards]);
 
   useEffect(() => {
-    if (searchTerm == "") {
+    if (searchTerm === "") {
       setFilteredCards(cards);
     } else {
       const fuse = new Fuse(cards, {
