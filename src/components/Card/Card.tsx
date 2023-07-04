@@ -2,7 +2,6 @@ import {
   BsFillArrowUpCircleFill,
   BsFillArrowDownCircleFill,
 } from "react-icons/bs";
-import { CommentsFeedType } from "../CommentsFeed/CommentsFeed";
 import "./Card.css";
 import { useState } from "react";
 

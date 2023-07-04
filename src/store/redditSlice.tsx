@@ -1,13 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import {
-  getPostComments,
-  getSubredditPosts,
-  getSubreddits,
-} from "../api/reddit";
-import Fuse from "fuse.js";
-import { useEffect } from "react";
-import { Root } from "react-dom/client";
+import { getSubredditPosts, getSubreddits } from "../api/reddit";
 
 //console.log(getSubredditPosts("Home"));
 //console.log(getSubreddits());

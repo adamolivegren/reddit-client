@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectCards,
-  selectIsLoading,
-  selectSearchTerm,
-} from "../../store/redditSlice";
+import { selectCards, selectSearchTerm } from "../../store/redditSlice";
 import { Card, CardType } from "../Card/Card";
 import { fetchPosts, selectSelectedSubreddit } from "../../store/redditSlice";
 import Fuse from "fuse.js";
-import { AppDispatch, RootState } from "../../store/store";
-// import { AnimatedList } from "react-animated-list";
+import { AppDispatch } from "../../store/store";
+
 import { FeedLoading } from "./FeedLoading";
 
 export function Feed() {
   const dispatch = useDispatch<AppDispatch>();
-  const isLoading = useSelector(selectIsLoading);
   const selectedSubreddit = useSelector(selectSelectedSubreddit);
   const searchTerm = useSelector(selectSearchTerm);
   const cards = useSelector(selectCards);
