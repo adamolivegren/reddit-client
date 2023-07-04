@@ -16,6 +16,7 @@ const initialState = {
   cards: [],
   subreddits: [],
   isLoading: false,
+  subredditsIsLoading: false,
   error: false,
   searchTerm: "",
   selectedSubreddit: "Home",
@@ -48,16 +49,16 @@ const redditSlice = createSlice({
         state.error = true;
       })
       .addCase(fetchSubreddits.pending, (state, action) => {
-        state.isLoading = true;
+        state.subredditsIsLoading = true;
         state.error = false;
       })
       .addCase(fetchSubreddits.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.subredditsIsLoading = false;
         state.error = false;
         state.subreddits = action.payload;
       })
       .addCase(fetchSubreddits.rejected, (state, action) => {
-        state.isLoading = false;
+        state.subredditsIsLoading = false;
         state.error = true;
       });
   },
@@ -69,6 +70,7 @@ export const selectSubreddits = (state: RootState) => state.reddit.subreddits;
 export const selectSelectedSubreddit = (state: RootState) =>
   state.reddit.selectedSubreddit;
 export const selectSearchTerm = (state: RootState) => state.reddit.searchTerm;
+export const selectIsLoading = (state: RootState) => state.reddit.isLoading;
 
 // Actions
 export const { setSearchTerm, setSelectedSubreddit } = redditSlice.actions;

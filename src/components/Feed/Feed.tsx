@@ -1,21 +1,34 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCards, selectSearchTerm } from "../../store/redditSlice";
+import {
+  selectCards,
+  selectIsLoading,
+  selectSearchTerm,
+} from "../../store/redditSlice";
 import { Card, CardType } from "../Card/Card";
 import { fetchPosts, selectSelectedSubreddit } from "../../store/redditSlice";
 import Fuse from "fuse.js";
-import { AppDispatch } from "../../store/store";
+import { AppDispatch, RootState } from "../../store/store";
+import { AnimatedList } from "react-animated-list";
+import { FeedLoading } from "./FeedLoading";
 
 export function Feed() {
   const dispatch = useDispatch<AppDispatch>();
+  const isLoading = useSelector(selectIsLoading);
   const selectedSubreddit = useSelector(selectSelectedSubreddit);
   const searchTerm = useSelector(selectSearchTerm);
   const cards = useSelector(selectCards);
   const [filteredCards, setFilteredCards] = useState(cards); //local state. What is to be displayed.
 
+  const loadingElements = [
+    <FeedLoading key="1" />,
+    <FeedLoading key="2" />,
+    <FeedLoading key="3" />,
+  ];
+
   useEffect(() => {
     dispatch(fetchPosts(selectedSubreddit));
-  }, [selectedSubreddit]);
+  }, [selectedSubreddit, dispatch]);
 
   useEffect(() => {
     setFilteredCards(cards);
@@ -35,6 +48,10 @@ export function Feed() {
       setFilteredCards(filteredResults);
     }
   }, [searchTerm, cards]);
+
+  if (isLoading) {
+    return <AnimatedList animation="grow">{loadingElements}</AnimatedList>;
+  }
 
   return (
     <div>

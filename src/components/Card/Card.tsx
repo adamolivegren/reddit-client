@@ -12,6 +12,8 @@ export type CardType = {
   created: number;
   author: string;
   num_comments: number;
+  ups: number;
+  downs: number;
 };
 export function Card({
   title,
@@ -19,6 +21,8 @@ export function Card({
   created,
   author,
   num_comments,
+  ups,
+  downs,
 }: CardType) {
   const [isUpvoted, setIsUpvoted] = useState<boolean>(false);
   const [isDownvoted, setIsDownvoted] = useState<boolean>(false);
@@ -41,7 +45,7 @@ export function Card({
           onClick={() => handleVoteClick("up")}
         />
         <p style={{ color: isUpvoted ? "green" : isDownvoted ? "red" : "" }}>
-          23
+          {ups - downs}
         </p>
         <BsFillArrowDownCircleFill
           style={{ color: isDownvoted ? "red" : "" }}
