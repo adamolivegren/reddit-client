@@ -23,7 +23,7 @@ export function Subreddits() {
 
   useEffect(() => {
     dispatch(fetchSubreddits());
-  }, []);
+  }, [subreddits]);
 
   const handleClick = (subredditName: string) => {
     dispatch(setSelectedSubreddit(subredditName));

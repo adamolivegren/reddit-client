@@ -25,9 +25,6 @@ const redditSlice = createSlice({
   name: "reddit",
   initialState: initialState,
   reducers: {
-    setCards(state, action) {
-      state.cards = action.payload;
-    },
     setSearchTerm(state, action) {
       state.searchTerm = action.payload;
     },
@@ -74,8 +71,7 @@ export const selectSelectedSubreddit = (state: RootState) =>
 export const selectSearchTerm = (state: RootState) => state.reddit.searchTerm;
 
 // Actions
-export const { setSearchTerm, setSelectedSubreddit, setCards } =
-  redditSlice.actions;
+export const { setSearchTerm, setSelectedSubreddit } = redditSlice.actions;
 
 // Reducer
 export default redditSlice.reducer;
