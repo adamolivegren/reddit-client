@@ -9,7 +9,7 @@ import { Card, CardType } from "../Card/Card";
 import { fetchPosts, selectSelectedSubreddit } from "../../store/redditSlice";
 import Fuse from "fuse.js";
 import { AppDispatch, RootState } from "../../store/store";
-import { AnimatedList } from "react-animated-list";
+// import { AnimatedList } from "react-animated-list";
 import { FeedLoading } from "./FeedLoading";
 
 export function Feed() {
@@ -49,9 +49,9 @@ export function Feed() {
     }
   }, [searchTerm, cards]);
 
-  if (isLoading) {
-    return <AnimatedList animation="grow">{loadingElements}</AnimatedList>;
-  }
+  // if (isLoading) {
+  //   return <AnimatedList animation="grow">{loadingElements}</AnimatedList>;
+  // }
 
   return (
     <div>
