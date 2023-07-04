@@ -6,8 +6,6 @@ import { fetchPosts, selectSelectedSubreddit } from "../../store/redditSlice";
 import Fuse from "fuse.js";
 import { AppDispatch } from "../../store/store";
 
-import { FeedLoading } from "./FeedLoading";
-
 export function Feed() {
   const dispatch = useDispatch<AppDispatch>();
   const selectedSubreddit = useSelector(selectSelectedSubreddit);
